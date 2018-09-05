@@ -1,7 +1,14 @@
 # Simple Cython C++ Hello world
 
+[![CircleCI](https://circleci.com/gh/snorrwe/hello-cython.svg?style=svg)](https://circleci.com/gh/snorrwe/hello-cython)
+
 ## Building
 
-`pip install cython`
-`python setup.py build_ext --inplace`
+Use either command:
+    - `python setup.py install`
+    - `pip install .`
+
+## Running the test suite
+
+`pytest`
 
