@@ -20,6 +20,10 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install pytest
+      - run:
+          name: build
+          command: |
+            . venv/bin/activate
             python setup.py build_ext --inplace
 
       - save_cache:
