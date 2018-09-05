@@ -1,11 +1,11 @@
 from setuptools import setup
 from distutils.sysconfig import get_python_lib
 import glob
+from distutils.extension import Extension
 
 SETUP_REQUIRES = ["Cython==0.28.5"]
 
 try:
-    from Cython.Build import cythonize
     from Cython.Distutils import build_ext
 except ImportError:
     import subprocess
@@ -17,7 +17,6 @@ except ImportError:
         'install',
         *SETUP_REQUIRES,
     ])
-    from Cython.Build import cythonize
     from Cython.Distutils import build_ext
 
 TEST_DEPENDENCIES = ["pytest"]
@@ -25,10 +24,12 @@ TEST_DEPENDENCIES = ["pytest"]
 setup(
     name="simple_greeting",
     version="0.0.1",
-    ext_modules=cythonize(
-        "src/greeting.pyx",
-        language="c++",
-    ),
+    ext_modules=[
+        Extension(
+            "greeting", ["src/greeting.pyx"],
+            language="c++",
+            extra_compile_args=["-O2", "-std=c++14"])
+    ],
     cmdclass={"build_ext": build_ext},
     data_files=[(get_python_lib(), glob.glob('src/*.so'))],
     author='Daniel Kiss',
@@ -36,5 +37,4 @@ setup(
     zip_safe=False,
     tests_require=TEST_DEPENDENCIES,
     extras_require={'ci': TEST_DEPENDENCIES},
-    extra_compile_args=["-O2", "-std=c++14"],
 )
