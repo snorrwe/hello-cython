@@ -2,6 +2,7 @@ from setuptools import setup
 from distutils.sysconfig import get_python_lib
 import glob
 from distutils.extension import Extension
+from Cython.Build import cythonize
 
 SETUP_REQUIRES = ["Cython==0.28.5"]
 
@@ -24,12 +25,12 @@ TEST_DEPENDENCIES = ["pytest"]
 setup(
     name="simple_greeting",
     version="0.0.1",
-    ext_modules=[
+    ext_modules=cythonize([
         Extension(
             "greeting", ["src/greeting.pyx"],
             language="c++",
             extra_compile_args=["-O2", "-std=c++14"])
-    ],
+    ]),
     cmdclass={"build_ext": build_ext},
     data_files=[(get_python_lib(), glob.glob('src/*.so'))],
     author='Daniel Kiss',
