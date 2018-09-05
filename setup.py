@@ -2,12 +2,12 @@ from setuptools import setup
 from distutils.sysconfig import get_python_lib
 import glob
 from distutils.extension import Extension
-from Cython.Build import cythonize
 
 SETUP_REQUIRES = ["Cython==0.28.5"]
 
 try:
     from Cython.Distutils import build_ext
+    from Cython.Build import cythonize
 except ImportError:
     import subprocess
     import sys
@@ -19,6 +19,7 @@ except ImportError:
         *SETUP_REQUIRES,
     ])
     from Cython.Distutils import build_ext
+    from Cython.Build import cythonize
 
 TEST_DEPENDENCIES = ["pytest"]
 
