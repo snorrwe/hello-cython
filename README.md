@@ -3,5 +3,5 @@
 ## Building
 
 `pip install cython`
-`pip install .`
+`python setup.py build_ext --inplace`
 

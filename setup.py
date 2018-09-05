@@ -2,7 +2,7 @@ from setuptools import setup
 from distutils.sysconfig import get_python_lib
 import glob
 
-SETUP_REQUIRES = ["cython==0.28.5"]
+SETUP_REQUIRES = ["Cython==0.28.5"]
 
 try:
     from Cython.Build import cythonize
@@ -25,8 +25,10 @@ TEST_DEPENDENCIES = ["pytest"]
 setup(
     name="simple_greeting",
     version="0.0.1",
-    #  package_dir={'': ''},
-    ext_modules=cythonize("src/greeting.pyx"),
+    ext_modules=cythonize(
+        "src/greeting.pyx",
+        language="c++",
+    ),
     cmdclass={"build_ext": build_ext},
     data_files=[(get_python_lib(), glob.glob('src/*.so'))],
     author='Daniel Kiss',
