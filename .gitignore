@@ -13,3 +13,9 @@ build/
 *.ipynb
 
 !example.ipynb
+
+\.pytest_cache/v/cache/
+
+\.pytest_cache/
+
+simple_greeting\.egg-info/
