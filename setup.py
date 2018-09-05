@@ -36,4 +36,5 @@ setup(
     zip_safe=False,
     tests_require=TEST_DEPENDENCIES,
     extras_require={'ci': TEST_DEPENDENCIES},
+    extra_compile_args=["-O2", "-std=c++14"],
 )
