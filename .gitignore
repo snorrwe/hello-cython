@@ -1,0 +1,13 @@
+env/
+
+__pycache__/
+
+src/**/*.cpp
+
+\.ipynb_checkpoints/
+
+build/
+
+*.pyd
+
+*.ipynb
