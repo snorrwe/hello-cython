@@ -5,8 +5,8 @@
 ## Building
 
 Use either command:
-    - `python setup.py install`
-    - `pip install .`
+- `python setup.py install`
+- `pip install .`
 
 ## Running the test suite
 
