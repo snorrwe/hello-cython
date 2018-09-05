@@ -35,5 +35,6 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
+            ls -al
             pytest
 
