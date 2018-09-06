@@ -23,8 +23,8 @@ class MergeSortImpl {
 
     It begin;
     It end;
-    Container A;
-    Container B;
+    Container container_a;
+    Container container_b;
 
 public:
     MergeSortImpl(It begin, It end, std::random_access_iterator_tag)
@@ -39,21 +39,22 @@ public:
 
         auto init = [&](auto& container) {
             container.reserve(size);
+            container.clear();
             std::copy(begin, end, std::back_inserter(container));
         };
 
-        init(A);
-        init(B);
+        init(container_a);
+        init(container_b);
 
-        top_down_split_merge(B, 0, size, A);
+        top_down_split_merge(container_b, 0, size, container_a);
 
         // Copy the result back to the original range
-        std::copy(A.begin(), A.end(), begin);
+        std::copy(container_a.begin(), container_a.end(), begin);
     }
 
 private:
-    static void top_down_split_merge(Container& B, size_t begin, size_t end,
-        Container& A)
+    static void top_down_split_merge(Container& container_b, size_t begin, size_t end,
+        Container& container_a)
     {
         // If length is less than 2 consider the range sorted
         if (end - begin < 2)
@@ -61,22 +62,24 @@ private:
 
         auto mid = (end + begin) / 2;
 
-        top_down_split_merge(A, begin, mid, B);
-        top_down_split_merge(A, mid, end, B);
+        // Swap the containers on every level of the recursion
+        top_down_split_merge(container_a, begin, mid, container_b);
+        top_down_split_merge(container_a, mid, end, container_b);
 
-        merge(B, begin, mid, end, A);
+        // Call merge with the original order of the containers
+        merge(container_b, begin, mid, end, container_a);
     }
 
-    static void merge(Container& A, size_t begin, size_t mid, size_t end,
-        Container& B)
+    static void merge(Container& container_a, size_t begin, size_t mid, size_t end,
+        Container& container_b)
     {
         auto i = begin, j = mid;
         for (; begin < end; ++begin) {
-            if (i < mid && (j >= end || A[i] <= A[j])) {
-                B[begin] = A[i];
+            if (i < mid && (j >= end || container_a[i] <= container_a[j])) {
+                container_b[begin] = container_a[i];
                 ++i;
             } else {
-                B[begin] = A[j];
+                container_b[begin] = container_a[j];
                 ++j;
             }
         }
