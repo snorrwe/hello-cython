@@ -21,7 +21,7 @@ cdef class PyGreeting:
     def greet(self, name):
         return self.thisptr.greet(name)
 
-cdef extern from "../cpp/merge_sort.hpp" namespace "merge_sort":
+cdef extern from "../lib/algorithms/src/merge_sort.hpp" namespace "merge_sort":
     cdef void sort[It](It begin, It end)
 
 from libcpp.vector cimport vector

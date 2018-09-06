@@ -1,0 +1,3 @@
+[submodule "lib/algorithms"]
+	path = lib/algorithms
+	url = https://github.com/snorrwe/algorithms

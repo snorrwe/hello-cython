@@ -3,7 +3,7 @@ from greeting import int_sort
 
 
 def generate():
-    a = list(i for i in range(int(1000)))
+    a = list(i for i in range(int(1e6)))
     random.shuffle(a)
     return a
 
