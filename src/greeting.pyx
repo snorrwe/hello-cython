@@ -20,3 +20,24 @@ cdef class PyGreeting:
 
     def greet(self, name):
         return self.thisptr.greet(name)
+
+cdef extern from "../cpp/merge_sort.hpp" namespace "merge_sort":
+    cdef void sort[It](It begin, It end)
+
+from libcpp.vector cimport vector
+from cython.operator cimport dereference as deref, preincrement as inc
+
+def int_sort(iterable):
+    cdef vector[int]* vect = new vector[int]()
+    cdef int i
+    vect.reserve(len(iterable))
+    for i in iterable:
+        vect.push_back(i)
+    sort(vect.begin(), vect.end())
+    result = []
+    it = vect.begin()
+    while it != vect.end():
+        result.append(deref(it))
+        inc(it)
+    del vect
+    return result
