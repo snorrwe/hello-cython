@@ -13,8 +13,3 @@ def random_list_of_ints():
 def test_sort(random_list_of_ints):
     result = int_sort(random_list_of_ints)
     assert result
-
-
-def test_builtin_sort(random_list_of_ints):
-    s = sorted(random_list_of_ints)
-    list(s)
