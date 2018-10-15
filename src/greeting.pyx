@@ -24,6 +24,9 @@ cdef class PyGreeting:
 cdef extern from "../lib/algorithms/src/merge_sort.hpp" namespace "merge_sort":
     cdef void sort[It](It begin, It end)
 
+cdef extern from "../lib/algorithms/src/quicksort.hpp" namespace "quicksort":
+    cdef void sort[It](It begin, It end)
+
 from libcpp.vector cimport vector
 from cython.operator cimport dereference as deref, preincrement as inc
 
